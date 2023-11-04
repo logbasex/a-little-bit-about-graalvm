@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+}
+
+group 'com.logbasex'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    graalvmVersion = '23.1.0'
+}
+
+dependencies {
+    // The polyglot dependency is required for Java embeddings.
+    implementation "org.graalvm.polyglot:polyglot:${graalvmVersion}"
+
+    // Language dependencies, add others as needed.
+    // https://mvnrepository.com/artifact/org.graalvm
+    implementation "org.graalvm.polyglot:js:${graalvmVersion}"
+    implementation "org.graalvm.polyglot:python:${graalvmVersion}"
+
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+// Custom tasks for GraalVM
+task nativeImage(type: Exec) {
+    // Only run this if you want to generate a native image
+    commandLine 'native-image', '--no-fallback', '-J-Xmx20g', '-cp', "$sourceSets.main.runtimeClasspath", 'com.logbasex.polygot.Main'
+    doFirst {
+        println "Building native image"
+    }
+}
+
+task run(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'com.logbasex.polygot.Main'
+}
