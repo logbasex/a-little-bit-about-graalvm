@@ -1,1 +1,2 @@
 rootProject.name = 'a-little-bit-about-graalvm'
+include 'polyglot'
