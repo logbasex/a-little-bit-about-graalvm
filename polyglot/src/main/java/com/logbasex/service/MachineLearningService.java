@@ -20,11 +20,7 @@ public class MachineLearningService {
 			}
 		}
 		
-		try (Context context = Context
-				.newBuilder()
-				.allowNativeAccess(true)
-				.allowAllAccess(true)
-				.build()) {
+		try (Context context = Context.newBuilder().allowNativeAccess(true).allowAllAccess(true).build()) {
 			// Load the Python script
 			context.eval("python", "import sys");
 			context.eval("python", "sys.path.append('" + tempDir.toAbsolutePath() + "')");

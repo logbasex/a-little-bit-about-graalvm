@@ -2,6 +2,9 @@
 - https://stackoverflow.com/questions/52156119/how-to-get-graal-sdk-packages-to-work-without-maven
 - https://medium.com/graalvm/multi-threaded-java-javascript-language-interoperability-in-graalvm-2f19c1f9c37b
 
+## Install
+- https://www.graalvm.org/latest/docs/getting-started/linux/
+
 ## Gu (GraalVM Updater)
 - https://www.graalvm.org/jdk17/reference-manual/graalvm-updater/#install-components
 - https://www.infoq.com/news/2023/10/graalvm-language-libraries/
