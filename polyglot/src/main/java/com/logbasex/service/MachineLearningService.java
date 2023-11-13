@@ -28,6 +28,9 @@ public class MachineLearningService {
 			// Load the Python script
 			context.eval("python", "import sys");
 			context.eval("python", "sys.path.append('" + tempDir.toAbsolutePath() + "')");
+			String path = "/home/logbasex/Downloads/graalvm-jdk-17_linux-x64_bin/graalvm-jdk-17.0.7+8.1/languages/python/lib/python3.10/site-packages";
+			context.eval("python", "sys.path.append('" + path + "')");
+			context.eval("python", "import sys; print(sys.path)");
 			
 			// Convert Java array to a polyglot (Python) list
 			Value pyInputData = context.eval("python", "[]");
@@ -36,7 +39,6 @@ public class MachineLearningService {
 			}
 			
 			// Run the Python model's predict function
-			context.eval("python", "import numpy");
 			context.eval("python", "import model");
 			Value pyFunction = context.eval("python", "model.predict");
 			Value result = pyFunction.execute(pyInputData);
